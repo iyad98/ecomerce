@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return 'admin';
+Route::group(['namespace'=>'Dashboard' ,'middleware' => 'auth:admin'] , function (){
+    Route::get('/' , 'DashboardController@index')->name('DashboardAdmin');
+});
+Route::group(['namespace'=>'Dashboard','middleware' => 'guest:admin'] , function (){
+    Route::get('/login', 'AdminLoginController@login')->name('admin.login');
+    Route::post('/login', 'AdminLoginController@checklogin')->name('admin.check.login');
 
 });
