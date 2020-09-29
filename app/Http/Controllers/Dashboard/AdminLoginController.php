@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminLoginRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminLoginController extends Controller
 {
@@ -19,5 +20,10 @@ class AdminLoginController extends Controller
         }else {
             return redirect()->route('admin.login')->with(['error' => 'هناك خطأ في البيانات']);
         }
+    }
+    public function logout(){
+        Auth::guard('admin')->logout();
+        return redirect()->route('admin.login');
+
     }
 }
