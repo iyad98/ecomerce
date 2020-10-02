@@ -37,8 +37,8 @@ class SettingsController extends Controller
             DB::commit();
             return redirect()->back()->with(['success' => __('admin/shipping.shipping-success')]);
         }catch (\Exception $exception){
-            return redirect()->back()->with(['error' => 'خطأ في النظام']);
             DB::rollBack();
+            return redirect()->back()->with(['error' => 'خطأ في النظام']);
 
         }
 

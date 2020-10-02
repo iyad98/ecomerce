@@ -28,6 +28,10 @@ Route::group(
             Route::get('shipping-methods/{type}', 'SettingsController@editShippingMethods')->name('edit.shipping.methods');
             Route::put('edit-shipping-methods/{id}', 'SettingsController@updateShippingMethods')->name('update.shipping.methods');
         });
+        Route::group(['prefix' => 'profile'], function () {
+            Route::get('edit', 'ProfileController@edit')->name('edit.profile');
+            Route::put('update', 'ProfileController@update')->name('update.profile');
+        });
     });
     Route::group(['namespace' => 'Dashboard', 'middleware' => 'guest:admin' , 'prefix' => 'admin'], function () {
         Route::get('/login', 'AdminLoginController@login')->name('admin.login');
